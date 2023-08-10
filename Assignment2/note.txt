@@ -2,9 +2,9 @@
  First created a form using html, and styled it using css.
  In jQuery first prevented the default submission of the form.
  created some variables with the values in input field.
- in the start set the error as false, and set the error message as an 
- empty string here thats for not showing an error message.
- Then gives if conditions for checking error. if error is true then giving 
+ in starting set the error as false, and set the error message as an 
+ empty string here thats for not showing an error message at first.
+ Then gives 'if' conditions for checking error. if error is true then giving 
  error message. 
  At last giving alerts sucessfully submitted or not submitted.
 
