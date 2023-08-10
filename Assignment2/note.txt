@@ -1,0 +1,5 @@
+ ------- Question 1 -------
+ First created a form using html, and styled it using css.
+ In jQuery first prevented the default submission of the form.
+ created some variables with the values in input field.
+ 
