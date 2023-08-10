@@ -8,4 +8,12 @@
  error message. 
  At last giving alerts sucessfully submitted or not submitted.
 
-  ------- Question 1 -------
+  ------- Question 2 -------
+  Created an array using all this images.
+  selected the elements in html and stored them in variables.
+  Initialized the current index of the image and the interval.
+  Created the dots using a for loop and append the dots on a container.
+  created a function for sliding the images with respect the index, In 
+  this the slidingImg function updating the src attributes of the image.
+  and the runDots function updating the active navigation dot.
+  set the interval using setInterval.
