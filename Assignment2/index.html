@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment2</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/code.jquery.com_jquery-3.7.0.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <!-- Question 1 -->
+      <form id="form">
+        <label for="name">Name:</label>
+        <input type="text" placeholder="enter your name here" id="name"><br>
+        <span class="errorMessage" id="nameError"></span><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" placeholder="enter your address here"></textarea><br>
+        <span class="errorMessage" id="addressError"></span><br>
+
+        <label for="dob">DOB:</label>
+        <input id="date" type="date" ></input><br>
+        <span class="errorMessage" id="dobError"></span><br>
+
+        <label for="age">Age:</label>
+        <select id="age">
+            <option value="">select</option>
+            <option value="0to20">0 to 20</option>
+            <option value="21to40">21 to 40</option>
+            <option value="above40">above 40</option>
+        </select><br>
+        <span class="errorMessage" id="ageError"></span><br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="male">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female">
+        <label for="female">Female</label><br>
+        <span class="errorMessage" id="genderError"></span><br>
+
+        <input type="checkbox"  id="terms">
+        <label for="terms">Agree to terms</label><br>
+        <span class="errorMessage" id="termsError"></span><br>
+
+        <button id="submit">submit</button>
+      </form>
+
+      <!-- Question 2 -->
+
+      <div class="container">
+        <div class="gallery">
+            <figure class="image"><img src="images/img1.jpg" alt="image not found"></figure>
+            <figure class="image"><img src="images/img2.jpeg" alt="image not found"></figure>
+            <figure class="image"><img src="images/img3.jpeg" alt="image not found"></figure>
+            <figure class="image"><img src="images/img4.jpeg" alt="image not found"></figure>
+            <figure class="image"><img src="images/img5.jpg" alt="image not found"></figure>
+        </div>
+        <div class="dots"></div>
+      </div>
+</body>
+</html>
