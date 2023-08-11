@@ -1,16 +1,16 @@
 $(document).ready(function() {
 
     $('#searchInput').on('input', function() { 
-        var searchText = $(this).val().toLowerCase();
+        let searchText = $(this).val().toUpperCase();
         $('.group').each(function() {
-            var productName = $(this).find('h3').text().toLowerCase();
+            let productName = $(this).find('h3').text();
             if (productName.includes(searchText)) {
                 $(this).show();
             } else {
                 $(this).hide();
             }
         });
-        var visibleProducts = $('.group:visible').length;
+        let visibleProducts = $('.group:visible').length;
         if (visibleProducts === 0) {
             $('.noMatches').show();
         } else {
@@ -18,11 +18,11 @@ $(document).ready(function() {
         }
     });
 
-    var cartItems = []; 
+    let cartItems = []; 
     $('.group button').click(function() {
-        var itemName = $(this).siblings('h3').text();
-        var itemPrice = parseInt($(this).siblings('p').text());
-        var existingItem = cartItems.find(item => item.name === itemName);
+        let itemName = $(this).siblings('h3').text();
+        let itemPrice = parseInt($(this).siblings('p').text());
+        let existingItem = cartItems.find(item => item.name === itemName);
         if (existingItem) {
             existingItem.quantity++;
         } else {
@@ -32,14 +32,14 @@ $(document).ready(function() {
     });
     
     $('.cartItems').on('click', '.incrementBtn', function() {
-        var itemName = $(this).parent().find('.cartItemName').text();
-        var item = cartItems.find(item => item.name === itemName);
+        let itemName = $(this).parent().find('.cartItemName').text();
+        let item = cartItems.find(item => item.name === itemName);
         item.quantity++;
         updateCartDisplay();
     });
     $('.cartItems').on('click', '.decrementBtn', function() {
-        var itemName = $(this).parent().find('.cartItemName').text();
-        var item = cartItems.find(item => item.name === itemName);
+        let itemName = $(this).parent().find('.cartItemName').text();
+        let item = cartItems.find(item => item.name === itemName);
         if (item.quantity > 1) {
             item.quantity--;
         } else {
@@ -50,9 +50,9 @@ $(document).ready(function() {
     
     function updateCartDisplay() {
         $('.cartItems').empty();
-        var cartTotal = 0;
+        let cartTotal = 0;
         cartItems.forEach(function(item) {
-            var cartItem = `
+            let cartItem = `
                 <li>
                     <span class="cartItemName">${item.name}</span>
                     <button class="decrementBtn">-</button>
