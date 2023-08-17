@@ -9,91 +9,49 @@
     <script src="js/script.js"></script>
 </head>
 <body>
-    <header>
-        <div class="heading">
-            <div class="top">
-                <h1 class="mainHeading">CraftBitz</h1>
-                <p class="subHeading">Iam so crafty!</p></div>
-            <div class="searchBar">
-                <input type="text" id="searchInput" placeholder="Search products...">
-            </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="list">
-            <div class="listofImage">
-                <div class="group">
-                    <figure class="craftImage"><img src="images/miniAlbam.jpg" alt="image not found"></figure>
-                    <h3>MINI ALBAM</h3>
-                    <h5>Contain five attractive<br> pages</h5>
-                    <p>600</p>
-                    <button>Add to cart </button>
+        <header>
+            <nav>
+                <div class="heading">
+                    <h1 class="mainHeading">ShopNow!</h1>
+                    <p class="subHeading">The latest shopping cart</p>
                 </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/miniBag.jpg" alt="image not found"></figure>
-                    <h3>MINI BAG</h3>
-                    <h5>Beautiful mini bag in <br>attractive price </h5>
-                    <p>400</p>
-                    <button>Add to cart </button>
+                <div class="searchBar">
+                    <input type="text" id="searchInput" placeholder="Search products...">
                 </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/diecutFlower.jpeg" alt="image not found"></figure>
-                    <h3>DIECUT FLOWERS</h3>
-                    <h5>Beautiful diecut flowers <br>set</h5>
-                    <p>100</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/largeAlbam.jpeg" alt="image not found"></figure>
-                    <h3>MINI ALBAM</h3>
-                    <h5>Attractive red mini albam <br>with seven pages </h5>
-                    <p>600</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/dreamCatcher.jpg" alt="image not found"></figure>
-                    <h3>DREAM CATCHER</h3>
-                    <h5>Beautiful red colored <br>dream catcher</h5>
-                    <p>1200</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/resin.jpeg" alt="image not found"></figure>
-                    <h3>RESIN FRAMES</h3>
-                    <h5>Beautiful resin art <br>gifts</h5>
-                    <p>1200</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/ExpltnBox.jpeg" alt="image not found"></figure>
-                    <h3>EXPLOSION BOX</h3>
-                    <h5>Meadiam sized explosion <br>box </h5>
-                    <p>1200</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/chcltbox.jpg" alt="image not found"></figure>
-                    <h3>CHOCOLATE BOX</h3>
-                    <h5>Attractive chocolate <br>boxes</h5>
-                    <p>400</p>
-                    <button>Add to cart </button>
-                </div>
-                <div class="group">
-                    <figure class="craftImage"><img src="images/yellowAlbam.jpg" alt="image not found"></figure>
-                    <h3>MINI ALBAM</h3>
-                    <h5>Attractive yellow <br>mini-albam</h5>
-                    <p>400</p>
-                    <button>Add to cart </button>
+            </nav>
+            <div class="scndNav">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="smartphones">Smartphones</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="fragrances">Fragrances</option>
+                    <option value="skincare">Skincare</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="home-decoration">Home Decoration</option>
+                </select>
+    
+                <div id="sortDropdown">
+                    <label for="sortPoints">Sort:</label>
+                    <select id="sortPoints">
+                        <option value="all">all</option>
+                        <option value="priceLowToHigh">Price - Low to High</option>
+                        <option value="priceHighToLow">Price - High to Low</option>
+                        <option value="rating">Rating</option>
+                    </select>
                 </div>
             </div>
-            <div class="cartArea">
-                <h2>Your Cart</h2>
-                <ul class="cartItems"></ul>
-                <p>Total: <span class="cartTotal">0</span></p>
-                <button class="checkoutBtn">Checkout</button>
+        </header>
+        <div class="container">
+            <div class="list">
+                <div class="allProducts"></div>
+                <div class="cartArea">
+                    <h2>Your Cart</h2>
+                    <ul class="cartItems"></ul>
+                    <p>Total: <span class="cartTotal">0</span></p>
+                    <button class="checkoutBtn">Checkout</button>
+                </div>
             </div>
             <p class="noMatches" >No matching products found!</p>
         </div>
-    </div>
 </body>
 </html>
