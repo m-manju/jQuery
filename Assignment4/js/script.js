@@ -70,58 +70,25 @@ $(document).ready(function() {
             let options = $(this).val();
     
             if(options === 'priceLowToHigh'){
-                console.log(products);
                 products.sort(function(a, b) {
                     return a.price - b.price;
                 });
                 console.log(products);
             } else if(options === 'priceHighToLow'){
                 products.sort(function(a, b) {
-                    console.log(products);
                     return b.price - a.price;
-                    console.log(products);
                 });
+                console.log(products);
             } else if(options === 'rating'){
                 products.sort(function(a, b) {
-                    console.log(products);
                     return b.rating - a.rating;
                 });
+                console.log(products);
             }else {
                 console.log("Not here");
             }
             CartProducts();
         });
-
-        // $('#sortPoints').on('change', function() {
-        //     let options = $(this).val();
-        
-        //     if (options === 'priceLowToHigh') {
-        //         let prices = products.map(product => product.price); 
-        //         console.log(prices);
-        //         prices.sort(function(a, b) {
-        //             return a - b; 
-        //         });
-        //         console.log(prices);
-        //         prices.sort(function(a, b) {
-        //             return a.prices - b.prices;
-        //         });
-        //     } else if (options === 'priceHighToLow') {
-        //         let prices = products.map(product => product.price);
-        //         products.sort(function(a, b) {
-        //             return b.price - a.price;
-        //         });
-        //     } else if (options === 'rating') {
-        //         let prices = products.map(product => product.price); 
-        //         products.sort(function(a, b) {
-        //             return b.rating - a.rating;
-        //         });
-        //     } else {
-        //         console.log("Not here");
-        //     }
-        
-        //     CartProducts();
-        // });
-        
 
         $('#categoryFilter').on('change', function() {
 
