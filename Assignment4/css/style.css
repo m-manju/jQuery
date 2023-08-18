@@ -113,13 +113,14 @@ h5{
     flex-wrap: wrap;
 }
 .imageContainer{
-    width: 370px;
-    height: 200px;
+    width: 100px;
+    height: 150px;
     display: flex;
     justify-content: center; 
-    overflow-x: auto; 
     white-space: nowrap; 
     margin-top: 10px; 
+    position: relative;
+    left: 20%;
 }
 .imageContainer img{
     width: 100%;
@@ -134,15 +135,23 @@ h5{
     width: 100px;
     height: 30px;
     border-radius: 6px;
+}.productDetail h5{
+    width: 400px;
 }
 .productDetail{
     border: 1px solid #2b5c92;
-    margin: 20px 40px 20px 0;
-    width: 400px;
+    margin: 10px 40px 0 0;
+    width: 1000px;
     text-align: center;
     padding: 10px;
+    display: flex;
+    position: relative;
 }
 .productDetail button{
     padding: 5px 10px;
     margin: 10px;
+}
+.allProducts .nextBtn{
+    /* position: absolute;
+    bottom: 0%; */
 }

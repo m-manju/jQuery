@@ -3,20 +3,36 @@ $(document).ready(function() {
     let cartItems = [];
     let cartTotal = 0;
     console.log(products);
-    
+    let i = 0;
+    const p = 3; 
+
     $.ajax({
         url: 'https://dummyjson.com/products',
         method: 'GET',
         dataType: 'json',  
         success: function(data) {
             products = data.products; 
-            allProductsDisplay(products);
+            loadMoreProducts();
             console.log(products);
         }
     });
 
-    function allProductsDisplay(products) {
+    
+    console.log($(window).height());
+    console.log($(document).height());
+    $(window).on('scroll', function() {
+        if ($(window).scrollTop() + 1 >= $(document).height() - $(window).height()) {
+            loadMoreProducts();
+        }
+    });
 
+    function loadMoreProducts() {
+        const displayingProducts = products.slice(i, i + p);
+        allProductsDisplay(displayingProducts);
+        i += p;
+    }
+
+    function allProductsDisplay(products) {
         let productsDetails = $('.allProducts');
 
         products.forEach(function(product) {
@@ -26,6 +42,7 @@ $(document).ready(function() {
 
             let insertProducts = `
                 <div class="productDetail">
+                  <div>
                     <h3>${product.title}</h3>
                     <h5>${product.description}</h5>
                     <p>Price: ${product.price}</p>
@@ -34,18 +51,17 @@ $(document).ready(function() {
                     <h5>Stock: ${product.stock}</h5>
                     <h5>Brand: ${product.brand}</h5>
                     <h5>Category: ${product.category}</h5>
+                    <button class="cartBtn">Add to Cart</button>
+                  </div>
                     <figure class="imageContainer">
                         ${imageHere}
                     </figure>
-                    <button class="cartBtn">Add to Cart</button>
                 </div>`;
 
-            productsDetails.append(insertProducts);
+            productsDetails.append(insertProducts);  
         });
 
-
         $('#searchInput').on('input', function() { 
-
             let searchText = $(this).val().toUpperCase();
 
             $('.productDetail').each(function() {
@@ -56,7 +72,6 @@ $(document).ready(function() {
                     $(this).hide();
                 }
             });
-
             let presentProducts = $('.productDetail:visible').length;
 
             if (presentProducts === 0) {
@@ -66,7 +81,9 @@ $(document).ready(function() {
             }
         });
 
+
         $('#sortPoints').on('change', function() {
+            $('.allProducts').empty();
             let options = $(this).val();
     
             if(options === 'priceLowToHigh'){
@@ -85,19 +102,21 @@ $(document).ready(function() {
                 });
                 console.log(products);
             }else {
-                console.log("Not here");
+                return products;
             }
-            CartProducts();
+            allProductsDisplay(products);
         });
+
 
         $('#categoryFilter').on('change', function() {
 
             let CategoryFilter = $(this).val();
-            console.log(CategoryFilter);
+            console.log('CategoryFilter',CategoryFilter);
 
             $('.productDetail').each(function() {
 
                 let productCategory = $(this).find('h5:contains("Category")').text().split(':')[1].trim();
+                console.log('productCategory',productCategory);
 
                 if (CategoryFilter === 'all' || productCategory === CategoryFilter) {
                     $(this).show();
@@ -110,8 +129,10 @@ $(document).ready(function() {
         productsDetails.on('click', '.cartBtn', function() {
 
             let productTitle = $(this).siblings('h3').text();
+            console.log("Product Title:", productTitle);
             let selectedProduct = products.find(product => 
                 product.title === productTitle);
+                console.log("Selected Product:", selectedProduct);
             let existingCartItem = cartItems.find(item => 
                 item.title === productTitle);
 
@@ -128,6 +149,7 @@ $(document).ready(function() {
 
             CartProducts();
         });
+        
 
         function CartProducts() {
 
@@ -138,7 +160,7 @@ $(document).ready(function() {
                 let cartItem = `
                     <li>
                         <span class="cartItemName">${product.title}</span>
-                        <span class="cartItemName">${product.price}</span>
+                        <span class="cartItemPrice">${product.price}</span>
                         <button class="decrementBtn">-</button>
                         <span class="cartItemQuantity">${product.quantity}</span>
                         <button class="incrementBtn">+</button>
@@ -154,7 +176,35 @@ $(document).ready(function() {
             });
         
             $('.cartTotal').text(cartTotal);
+            
+            $('.incrementBtn').click(function (e) {
+                e.preventDefault();
+                var increValue = $(this).siblings('.cartItemQuantity').text();
+                var value = parseInt(increValue);
+                if (value < 10) {
+                    value += 1;
+                    $(this).siblings('.cartItemQuantity').text(value);
+                }
+            });
+        
+            $('.decrementBtn').click(function (e) {
+                e.preventDefault();
+                var decreValue = $(this).siblings('.cartItemQuantity').text();
+                var value = parseInt(decreValue, 10);
+                if (value > 0) {
+                    value -= 1;
+                    $(this).siblings('.cartItemQuantity').text(value);
+                }
+        
+                if (value === 0) {
+                    $(this).closest('li').remove(); 
+                }
+            });
+            
         }
     };
-
+    
 });
+
+
+
