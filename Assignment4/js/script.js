@@ -12,66 +12,68 @@ $(document).ready(function() {
         dataType: 'json',  
         success: function(data) {
             products = data.products; 
-            loadMoreProducts();
+            loadingProducts();
             console.log('ajax',products);
 
             console.log($(window).height());
             console.log($(document).height());
             $(window).on('scroll', function() {
                 if ($(window).scrollTop() + 1 >= $(document).height() - $(window).height()) {
-                    loadMoreProducts();
+                    loadingProducts();
                 }
             });
         
-            function loadMoreProducts() {
+            function loadingProducts() {
                 const displayingProducts = products.slice(i, i + p);
                 allProductsDisplay(displayingProducts);
                 i += p;
-                console.log('loadMoreProducts',products);
+                console.log('loadingProducts',products);
             }
             
-            $('#categoryFilter').on('change', function() {
-        
-                let CategoryFilter = $(this).val();
-                console.log('CategoryFilter',CategoryFilter);
-                $('.productDetail').hide();
-        
-                $('.productDetail').each(function() {
-        
-                    let productCategory = $(this).find('h5:contains("Category")').text().split(':')[1].trim();
-                    console.log('productCategory',productCategory);
-        
-                    if (CategoryFilter === 'all' || productCategory === CategoryFilter) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
+
+            $('#searchInput').on('input', function() {
                 allProductsDisplay(products);
-                
-            });
+                let searchText = $(this).val().toLowerCase();
+                let showingProducts =0;
             
-            $('#searchInput').on('input', function() { 
-                let searchText = $(this).val().toUpperCase();
-        
                 $('.productDetail').each(function() {
-                    let productName = $(this).find('h3').text();
+                    let productName = $(this).find('h3').text().toLowerCase();
+            
+                    console.log(productName);
                     if (productName.includes(searchText)) {
                         $(this).show();
+                        showingProducts += 1;
                     } else {
                         $(this).hide();
                     }
                 });
-                let presentProducts = $('.productDetail:visible').length;
-        
-                if (presentProducts === 0) {
+            
+                if (showingProducts === 0) {
                     $('.noMatches').show();
+                    console.log("no matches")
                 } else {
                     $('.noMatches').hide();
+                    console.log("matches")
                 }
+            
+            }); 
+            
+
+            $('#categoryFilter').on('change', function() {
+                let CategoryFilter = $(this).val();
+                console.log('CategoryFilter', CategoryFilter);
                 
+                let filteringByCatagory = [];
+                if (CategoryFilter === 'all') {
+                    filteringByCatagory = products;
+                } else {
+                    filteringByCatagory = products.filter(product =>
+                        product.category === CategoryFilter);
+                }
+            
+                allProductsDisplay(filteringByCatagory);
             });
-        
+
         
             $('#sortPoints').on('change', function() {
                 $('.allProducts').empty();
@@ -102,6 +104,7 @@ $(document).ready(function() {
         
             function allProductsDisplay(products) {
                 let productsDetails = $('.allProducts');
+                productsDetails.empty();
                 console.log('allProductsDisplay',products);
         
                 products.forEach(function(product) {
@@ -130,10 +133,9 @@ $(document).ready(function() {
                     productsDetails.append(insertProducts);  
                 });
                 
-                productsDetails.on('click', '.cartBtn', function() {
         
+                $('.cartBtn').on('click', function() {
                     let productTitle = $(this).siblings('h3').text();
-                    console.log("Product Title:", productTitle);
                     let selectedProduct = products.find(product => 
                         product.title === productTitle);
                         console.log("Selected Product:", selectedProduct);
@@ -141,7 +143,7 @@ $(document).ready(function() {
                         item.title === productTitle);
         
                     if (existingCartItem) {
-                        existingCartItem.quantity++;
+                        existingCartItem.quantity+=1;
                     } else {
                         cartItems.push({ 
                             title: selectedProduct.title, 
@@ -153,12 +155,12 @@ $(document).ready(function() {
                     
                     CartProducts();
                 });
-                
+
                 $('.cartItems').on('click', '.incrementBtn', function() {
                     let productTitle = $(this).siblings('.cartItemName').text();
                     let cartItem = cartItems.find(item => item.title === productTitle);
                     if (cartItem) {
-                        cartItem.quantity += 1;
+                        cartItem.quantity+= 1;
                         CartProducts();
                     }
                 });
@@ -186,7 +188,6 @@ $(document).ready(function() {
                         let cartItem = `
                             <li>
                                 <span class="cartItemName">${product.title}</span>
-                                <span class="cartItemPrice">${product.price}</span>
                                 <button class="decrementBtn">-</button>
                                 <span class="cartItemQuantity">${product.quantity}</span>
                                 <button class="incrementBtn">+</button>
@@ -202,7 +203,7 @@ $(document).ready(function() {
                     });
                 
                     $('.cartTotal').text(cartTotal);
-                }
+                }   
             }
         }
     });   
