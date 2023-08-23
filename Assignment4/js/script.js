@@ -3,8 +3,9 @@ $(document).ready(function() {
     let cartItems = [];
     let cartTotal = 0;
     console.log(products);
-    let i = 0;
-    const p = 3; 
+    let i = 3;
+    let p = 3; 
+    let displayedItemCount = i;
 
     $.ajax({
         url: 'https://dummyjson.com/products',
@@ -12,22 +13,21 @@ $(document).ready(function() {
         dataType: 'json',  
         success: function(data) {
             products = data.products; 
-            loadingProducts();
+            loadingProducts(displayedItemCount);
             console.log('ajax',products);
 
             console.log($(window).height());
             console.log($(document).height());
             $(window).on('scroll', function() {
-                if ($(window).scrollTop() + 1 >= $(document).height() - $(window).height()) {
-                    loadingProducts();
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    displayedItemCount += p;
+                    loadingProducts(displayedItemCount);
                 }
             });
-        
-            function loadingProducts() {
-                const displayingProducts = products.slice(i, i + p);
+
+            function loadingProducts(displayCount) {
+                const displayingProducts = products.slice(0, displayCount);
                 allProductsDisplay(displayingProducts);
-                i += p;
-                console.log('loadingProducts',products);
             }
             
 
